@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/conradkdotcom/rprompt.svg?branch=master)](https://travis-ci.org/conradkdotcom/rprompt)
 [![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkdotcom/rprompt)
 
-This [Rust](http://www.rust-lang.org/) package allows you to safely read
-replys from standard input in a console application.
+This [Rust](http://www.rust-lang.org/) package allows you to easily prompt for input
+from `STDIN` in a console application. Essentially, this crate calls `std::io::read_line()`
+and then removes the ending `\n` from the result, because you most likely don't need the `\n`. And of course, there are some utility functions around that.
 
 You can build the documentation with `cargo doc` or [view it online](https://docs.rs/rprompt/).
 
