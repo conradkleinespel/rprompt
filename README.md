@@ -16,7 +16,7 @@ Add `rprompt` as a dependency in Cargo.toml:
 
 ```toml
 [dependencies]
-rprompt = "1.0.0"
+rprompt = "1.0"
 ```
 
 Use `rprompt` within your code:

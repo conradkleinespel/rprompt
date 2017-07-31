@@ -15,6 +15,7 @@
 
 use std::io::Write;
 
+/// Reads user input, but without \n as `stdin::read_line` would
 pub fn read_reply() -> std::io::Result<String> {
     let mut reply = String::new();
 
@@ -39,6 +40,7 @@ pub fn read_reply() -> std::io::Result<String> {
     Ok(reply)
 }
 
+/// Prompts for user input on STDOUT
 pub fn prompt_reply_stdout(prompt: &str) -> std::io::Result<String> {
     let mut stdout = std::io::stdout();
 
@@ -47,6 +49,7 @@ pub fn prompt_reply_stdout(prompt: &str) -> std::io::Result<String> {
     read_reply()
 }
 
+/// Prompts for user input on STDERR
 pub fn prompt_reply_stderr(prompt: &str) -> std::io::Result<String> {
     let mut stderr = std::io::stderr();
 
