@@ -1,6 +1,6 @@
 [package]
 name = "rprompt"
-version = "1.0.2"
+version = "1.0.3"
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
 description = "Prompt user input in console applications."
 license = "Apache-2.0"

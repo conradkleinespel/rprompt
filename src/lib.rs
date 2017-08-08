@@ -32,10 +32,12 @@ pub fn read_reply() -> std::io::Result<String> {
     }
 
     // Remove the \n from the line.
-    reply.pop().ok_or(std::io::Error::new(
-        std::io::ErrorKind::UnexpectedEof,
-        "unexpected end of file",
-    ))?;
+    reply.pop();
+
+    // Remove the \r from the line if present
+    if reply.chars().last() == Some('\r') {
+        reply.pop();
+    }
 
     Ok(reply)
 }
