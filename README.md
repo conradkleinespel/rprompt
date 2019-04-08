@@ -47,6 +47,7 @@ We welcome contribution from everyone. Feel free to open an issue or a pull requ
 Here's a list of existing `rprompt` contributors:
 
 * [@conradkleinespel](https://github.com/conradkleinespel)
+* [@dpc](https://github.com/dpc)
 * [@steveatinfincia](https://github.com/steveatinfincia)
 
 Thank you very much for your help!  :smiley:  :heart:
