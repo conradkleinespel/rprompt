@@ -24,7 +24,7 @@ pub fn read_reply() -> std::io::Result<String> {
     // We should have a newline at the end. This helps prevent things such as:
     // > printf "no-newline" | program-using-rprompt
     // If we didn't have the \n check, we'd be removing the last "e" by mistake.
-    if reply.chars().last() != Some('\n') {
+    if !reply.ends_with('\n') {
         return Err(std::io::Error::new(
             std::io::ErrorKind::UnexpectedEof,
             "unexpected end of file",
@@ -35,7 +35,7 @@ pub fn read_reply() -> std::io::Result<String> {
     reply.pop();
 
     // Remove the \r from the line if present
-    if reply.chars().last() == Some('\r') {
+    if reply.ends_with('\r') {
         reply.pop();
     }
 
