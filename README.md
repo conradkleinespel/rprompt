@@ -1,7 +1,8 @@
 # Rustastic Prompt
 
-[![Build Status](https://travis-ci.org/conradkdotcom/rprompt.svg?branch=master)](https://travis-ci.org/conradkdotcom/rprompt)
-[![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkdotcom/rprompt)
+[![Build Status](https://travis-ci.org/conradkleinespel/rprompt.svg?branch=master)](https://travis-ci.org/conradkleinespel/rprompt)
+[![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkleinespel/rprompt)
+[![Chat on Discord](https://img.shields.io/badge/chat-on%20discord-7289DA)](https://discord.gg/9zXtYqQ)
 
 `rprompt` allows you to easily prompt for input in a console application on Linux, BSD, OSX and Windows.
 
@@ -9,8 +10,8 @@
 
 `rprompt` is currently being maintained as a side-project, during nights and weekends, next to my full-time job. I am looking for a way to sustain my work on open source. If you find value in what I do and you would like to contribute, please consider:
 
-- [Becoming a backer on Patreon](https://www.patreon.com/conradkdotcom)
-- [Making a recurring donation on Liberapay](https://liberapay.com/conradkdotcom/)
+- [Becoming a backer on Patreon](https://www.patreon.com/conradkleinespel)
+- [Making a recurring donation on Liberapay](https://liberapay.com/conradkleinespel/)
 
 ## Usage
 
