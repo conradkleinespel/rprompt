@@ -7,10 +7,10 @@
 
 ## Supporting `rprompt`
 
-The development and maintenance of `rprompt` is made possible thanks to the support of generous backers. If you'd like to participate in its funding, you can:
+`rprompt` is currently being maintained as a side-project, during nights and weekends, next to my full-time job. I am looking for a way to sustain my work on open source. If you find value in what I do and you would like to contribute, please consider:
 
-- [Back the project on Patreon](https://www.patreon.com/conradkdotcom)
-- [Make a pledge on Liberapay](https://liberapay.com/conradkdotcom/)
+- [Becoming a backer on Patreon](https://www.patreon.com/conradkdotcom)
+- [Making a recurring donation on Liberapay](https://liberapay.com/conradkdotcom/)
 
 ## Usage
 
