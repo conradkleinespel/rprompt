@@ -3,13 +3,14 @@
 [![Build Status](https://travis-ci.org/conradkdotcom/rprompt.svg?branch=master)](https://travis-ci.org/conradkdotcom/rprompt)
 [![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkdotcom/rprompt)
 
-This [Rust](http://www.rust-lang.org/) package allows you to easily prompt for input
-from `STDIN` in a console application. Essentially, this crate calls `std::io::read_line()`
-and then removes the ending `\n` from the result, because you most likely don't need the `\n`. And of course, there are some utility functions around that.
+`rprompt` allows you to easily prompt for input in a console application on Linux, BSD, OSX and Windows.
 
-You can build the documentation with `cargo doc` or [view it online](https://docs.rs/rprompt/).
+## Supporting `rprompt`
 
-I'd appreciate feedback if you use this library :-)
+The development and maintenance of `rprompt` is made possible thanks to the support of generous backers. If you'd like to participate in its funding, you can:
+
+- [Back the project on Patreon](https://www.patreon.com/conradkdotcom)
+- [Make a pledge on Liberapay](https://liberapay.com/conradkdotcom/)
 
 ## Usage
 
@@ -40,6 +41,8 @@ fn main() {
 }
 ```
 
+The full API documentation is available at [https://docs.rs/rprompt](https://docs.rs/rprompt).
+
 ## Contributors
 
 We welcome contribution from everyone. Feel free to open an issue or a pull request at any time.
@@ -51,3 +54,7 @@ Here's a list of existing `rprompt` contributors:
 * [@steveatinfincia](https://github.com/steveatinfincia)
 
 Thank you very much for your help!  :smiley:  :heart:
+
+## License
+
+The source code is released under the Apache 2.0 license.
