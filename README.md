@@ -6,12 +6,7 @@
 
 `rprompt` allows you to easily prompt for input in a console application on Linux, BSD, OSX and Windows.
 
-## Supporting `rprompt`
-
-`rprompt` is currently being maintained as a side-project, during nights and weekends, next to my full-time job. I am looking for a way to sustain my work on open source. If you find value in what I do and you would like to contribute, please consider:
-
-- [Becoming a backer on Patreon](https://www.patreon.com/conradkleinespel)
-- [Making a recurring donation on Liberapay](https://liberapay.com/conradkleinespel/)
+`rprompt` is made available free of charge. You can support its development through [Liberapay](https://liberapay.com/conradkleinespel/) 💪
 
 ## Usage
 
