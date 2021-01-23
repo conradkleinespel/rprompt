@@ -1,8 +1,7 @@
 # Rustastic Prompt
 
-[![Build Status](https://travis-ci.org/conradkleinespel/rprompt.svg?branch=master)](https://travis-ci.org/conradkleinespel/rprompt)
+![CI](https://github.com/conradkleinespel/rprompt/workflows/CI/badge.svg)
 [![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkleinespel/rprompt)
-[![Chat on Discord](https://img.shields.io/badge/chat-on%20discord-7289DA)](https://discord.gg/9zXtYqQ)
 
 `rprompt` allows you to easily prompt for input in a console application on Linux, BSD, OSX and Windows.
 
