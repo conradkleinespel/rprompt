@@ -9,3 +9,6 @@ repository = "https://github.com/conradkleinespel/rprompt"
 documentation = "https://docs.rs/rprompt/"
 readme = "README.md"
 keywords = ["prompt", "readline"]
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["std", "winnt", "fileapi", "processenv", "winbase", "handleapi", "consoleapi", "minwindef", "wincon"] }
