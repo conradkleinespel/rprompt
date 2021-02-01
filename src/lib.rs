@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#[cfg(windows)]
+extern crate winapi;
 
-use std::io::Write;
-
-/// Reads user input, but without \n as `stdin::read_line` would
-pub fn read_reply() -> std::io::Result<String> {
+/// Reads user input
+pub fn read_reply(reader: &mut impl BufRead) -> std::io::Result<String> {
     let mut reply = String::new();
 
-    std::io::stdin().read_line(&mut reply)?;
+    reader.read_line(&mut reply)?;
 
     // We should have a newline at the end. This helps prevent things such as:
     // > printf "no-newline" | program-using-rprompt
@@ -42,20 +42,65 @@ pub fn read_reply() -> std::io::Result<String> {
     Ok(reply)
 }
 
-/// Prompts for user input on STDOUT
-pub fn prompt_reply_stdout(prompt: &str) -> std::io::Result<String> {
-    let mut stdout = std::io::stdout();
-
-    write!(stdout, "{}", prompt)?;
-    stdout.flush()?;
-    read_reply()
+/// Displays a message on the TTY, then reads user input
+pub fn prompt_reply(reader: &mut impl BufRead, prompt: &str) -> std::io::Result<String> {
+    print_tty(prompt).and_then(|_| read_reply(reader))
 }
 
-/// Prompts for user input on STDERR
-pub fn prompt_reply_stderr(prompt: &str) -> std::io::Result<String> {
-    let mut stderr = std::io::stderr();
+#[cfg(unix)]
+mod unix {
+    use std::io::Write;
 
-    write!(stderr, "{}", prompt)?;
-    stderr.flush()?;
-    read_reply()
+    /// Displays a message on the TTY
+    pub fn print_tty(prompt: &str) -> ::std::io::Result<()> {
+        let mut stream = ::std::fs::OpenOptions::new().write(true).open("/dev/tty")?;
+        write!(stream, "{}", prompt)?;
+        stream.flush()
+    }
 }
+
+#[cfg(windows)]
+mod windows {
+    use std::io::{self, Write};
+    use std::os::windows::io::{AsRawHandle, FromRawHandle};
+    use std::ptr;
+    use winapi::shared::minwindef::LPDWORD;
+    use winapi::um::consoleapi::{GetConsoleMode, SetConsoleMode};
+    use winapi::um::fileapi::{CreateFileA, GetFileType, OPEN_EXISTING};
+    use winapi::um::handleapi::INVALID_HANDLE_VALUE;
+    use winapi::um::processenv::GetStdHandle;
+    use winapi::um::winbase::{FILE_TYPE_PIPE, STD_INPUT_HANDLE};
+    use winapi::um::wincon::{ENABLE_LINE_INPUT, ENABLE_PROCESSED_INPUT};
+    use winapi::um::winnt::{
+        FILE_SHARE_READ, FILE_SHARE_WRITE, GENERIC_READ, GENERIC_WRITE, HANDLE,
+    };
+
+    /// Displays a message on the TTY
+    pub fn print_tty(prompt: &str) -> ::std::io::Result<()> {
+        let handle = unsafe {
+            CreateFileA(
+                b"CONOUT$\x00".as_ptr() as *const i8,
+                GENERIC_READ | GENERIC_WRITE,
+                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                ::std::ptr::null_mut(),
+                OPEN_EXISTING,
+                0,
+                ::std::ptr::null_mut(),
+            )
+        };
+        if handle == INVALID_HANDLE_VALUE {
+            return Err(::std::io::Error::last_os_error());
+        }
+
+        let mut stream = unsafe { ::std::fs::File::from_raw_handle(handle) };
+
+        write!(stream, "{}", prompt)?;
+        stream.flush()
+    }
+}
+
+use std::io::BufRead;
+#[cfg(unix)]
+pub use unix::print_tty;
+#[cfg(windows)]
+pub use windows::print_tty;

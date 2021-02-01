@@ -1,15 +1,16 @@
 extern crate rprompt;
 
+use std::io::stdin;
+
 fn main() {
-    // Prompt for a reply on STDOUT
-    let reply = rprompt::prompt_reply_stdout("What's your name? ").unwrap();
+    let stdin = stdin();
+
+    // Prompt for a reply on TTY
+    let reply = rprompt::prompt_reply(&mut stdin.lock(), "What's your name? ").unwrap();
     println!("Your reply is {}", reply);
 
-    // Prompt for a reply on STDERR
-    let reply = rprompt::prompt_reply_stderr("What is the capital of Rust crates? ").unwrap();
-    println!("Your reply is {}", reply);
-
-    // Read a reply without prompt
-    let reply = rprompt::read_reply().unwrap();
+    // Or print and read the reply separately
+    rprompt::print_tty("What's your name? ").unwrap();
+    let reply = rprompt::read_reply(&mut stdin.lock()).unwrap();
     println!("Your reply is {}", reply);
 }
