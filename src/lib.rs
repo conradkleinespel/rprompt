@@ -43,8 +43,8 @@ pub fn read_reply(reader: &mut impl BufRead) -> std::io::Result<String> {
 }
 
 /// Displays a message on the TTY, then reads user input
-pub fn prompt_reply(reader: &mut impl BufRead, prompt: &str) -> std::io::Result<String> {
-    print_tty(prompt).and_then(|_| read_reply(reader))
+pub fn prompt_reply(reader: &mut impl BufRead, prompt: impl ToString) -> std::io::Result<String> {
+    print_tty(prompt.to_string().as_str()).and_then(|_| read_reply(reader))
 }
 
 #[cfg(unix)]
@@ -52,9 +52,9 @@ mod unix {
     use std::io::Write;
 
     /// Displays a message on the TTY
-    pub fn print_tty(prompt: &str) -> ::std::io::Result<()> {
+    pub fn print_tty(prompt: impl ToString) -> ::std::io::Result<()> {
         let mut stream = ::std::fs::OpenOptions::new().write(true).open("/dev/tty")?;
-        write!(stream, "{}", prompt)?;
+        write!(stream, "{}", prompt.to_string().as_str())?;
         stream.flush()
     }
 }
@@ -76,7 +76,7 @@ mod windows {
     };
 
     /// Displays a message on the TTY
-    pub fn print_tty(prompt: &str) -> ::std::io::Result<()> {
+    pub fn print_tty(prompt: impl ToString) -> ::std::io::Result<()> {
         let handle = unsafe {
             CreateFileA(
                 b"CONOUT$\x00".as_ptr() as *const i8,
@@ -94,7 +94,7 @@ mod windows {
 
         let mut stream = unsafe { ::std::fs::File::from_raw_handle(handle) };
 
-        write!(stream, "{}", prompt)?;
+        write!(stream, "{}", prompt.to_string().as_str())?;
         stream.flush()
     }
 }
