@@ -15,31 +15,15 @@
 #[cfg(windows)]
 extern crate winapi;
 
+extern crate rutil;
+
 /// Reads user input
 pub fn read_reply(reader: &mut impl BufRead) -> std::io::Result<String> {
     let mut reply = String::new();
 
     reader.read_line(&mut reply)?;
 
-    // We should have a newline at the end. This helps prevent things such as:
-    // > printf "no-newline" | program-using-rprompt
-    // If we didn't have the \n check, we'd be removing the last "e" by mistake.
-    if !reply.ends_with('\n') {
-        return Err(std::io::Error::new(
-            std::io::ErrorKind::UnexpectedEof,
-            "unexpected end of file",
-        ));
-    }
-
-    // Remove the \n from the line.
-    reply.pop();
-
-    // Remove the \r from the line if present
-    if reply.ends_with('\r') {
-        reply.pop();
-    }
-
-    Ok(reply)
+    rutil::fix_new_line::fix_new_line(reply)
 }
 
 /// Displays a message on the TTY, then reads user input
@@ -61,19 +45,11 @@ mod unix {
 
 #[cfg(windows)]
 mod windows {
-    use std::io::{self, Write};
-    use std::os::windows::io::{AsRawHandle, FromRawHandle};
-    use std::ptr;
-    use winapi::shared::minwindef::LPDWORD;
-    use winapi::um::consoleapi::{GetConsoleMode, SetConsoleMode};
-    use winapi::um::fileapi::{CreateFileA, GetFileType, OPEN_EXISTING};
+    use std::io::Write;
+    use std::os::windows::io::FromRawHandle;
+    use winapi::um::fileapi::{CreateFileA, OPEN_EXISTING};
     use winapi::um::handleapi::INVALID_HANDLE_VALUE;
-    use winapi::um::processenv::GetStdHandle;
-    use winapi::um::winbase::{FILE_TYPE_PIPE, STD_INPUT_HANDLE};
-    use winapi::um::wincon::{ENABLE_LINE_INPUT, ENABLE_PROCESSED_INPUT};
-    use winapi::um::winnt::{
-        FILE_SHARE_READ, FILE_SHARE_WRITE, GENERIC_READ, GENERIC_WRITE, HANDLE,
-    };
+    use winapi::um::winnt::{FILE_SHARE_READ, FILE_SHARE_WRITE, GENERIC_READ, GENERIC_WRITE};
 
     /// Displays a message on the TTY
     pub fn print_tty(prompt: impl ToString) -> ::std::io::Result<()> {
