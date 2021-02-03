@@ -28,18 +28,31 @@ extern crate winapi;
 
 extern crate rutil;
 
-/// Reads user input
-pub fn read_reply(reader: &mut impl BufRead) -> std::io::Result<String> {
+/// Reads user input from stdin
+pub fn read_reply() -> std::io::Result<String> {
+    read_reply_from_bufread(&mut std::io::stdin().lock())
+}
+
+/// Reads user input from anything that implements BufRead
+pub fn read_reply_from_bufread(reader: &mut impl BufRead) -> std::io::Result<String> {
     let mut reply = String::new();
 
     reader.read_line(&mut reply)?;
 
-    rutil::fix_new_line::fix_new_line(reply)
+    rutil::fix_new_line(reply)
 }
 
-/// Displays a message on the TTY, then reads user input
-pub fn prompt_reply(reader: &mut impl BufRead, prompt: impl ToString) -> std::io::Result<String> {
-    print_tty(prompt.to_string().as_str()).and_then(|_| read_reply(reader))
+/// Displays a message on the TTY, then reads user input from stdin
+pub fn prompt_reply(prompt: impl ToString) -> std::io::Result<String> {
+    prompt_reply_from_bufread(&mut std::io::stdin().lock(), prompt)
+}
+
+/// Displays a message on the TTY, then reads user input from anything that implements BufRead
+pub fn prompt_reply_from_bufread(
+    reader: &mut impl BufRead,
+    prompt: impl ToString,
+) -> std::io::Result<String> {
+    print_tty(prompt.to_string().as_str()).and_then(|_| read_reply_from_bufread(reader))
 }
 
 #[cfg(unix)]
