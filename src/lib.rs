@@ -23,10 +23,7 @@
 //! println!("Your name is {}", name);
 //! ```
 
-#[cfg(windows)]
-extern crate winapi;
-
-extern crate rutil;
+use std::io::BufRead;
 
 /// Reads user input from stdin
 pub fn read_reply() -> std::io::Result<String> {
@@ -99,8 +96,7 @@ mod windows {
     }
 }
 
-use std::io::BufRead;
 #[cfg(unix)]
-pub use unix::print_tty;
+pub use crate::unix::print_tty;
 #[cfg(windows)]
 pub use windows::print_tty;
