@@ -1,9 +1,6 @@
 # Rustastic Prompt
 
-![CI](https://github.com/conradkleinespel/rprompt/workflows/CI/badge.svg)
-[![Build status](https://ci.appveyor.com/api/projects/status/ch4ljnrsot9sk0g8?svg=true)](https://ci.appveyor.com/project/conradkleinespel/rprompt)
-
-`rprompt` allows you to easily prompt for input in a console application on Linux, BSD, OSX and Windows.
+`rprompt` makes it easy to prompt for input in a console application on all platforms, Unix and Windows alike.
 
 `rprompt` is made available free of charge. You can support its development through [Liberapay](https://liberapay.com/conradkleinespel/) 💪
 
@@ -16,27 +13,7 @@ Add `rprompt` as a dependency in Cargo.toml:
 rprompt = "1.0"
 ```
 
-Use `rprompt` within your code:
-
-```rust
-extern crate rprompt;
-
-fn main() {
-    // Prompt for a reply on STDOUT
-    let reply = rprompt::prompt_reply_stdout("Password: ").unwrap();
-    println!("Your reply is {}", reply);
-
-    // Prompt for a reply on STDERR
-    let reply = rprompt::prompt_reply_stderr("Password: ").unwrap();
-    println!("Your reply is {}", reply);
-
-    // Read a reply without prompt
-    let reply = rprompt::read_reply().unwrap();
-    println!("Your reply is {}", reply);
-}
-```
-
-The full API documentation is available at [https://docs.rs/rprompt](https://docs.rs/rprompt).
+See examples and docs at [https://docs.rs/rprompt](https://docs.rs/rprompt).
 
 ## Contributors
 
