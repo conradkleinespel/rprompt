@@ -25,6 +25,8 @@
 
 use std::io::BufRead;
 
+mod rutil;
+
 /// Reads user input from stdin
 pub fn read_reply() -> std::io::Result<String> {
     read_reply_from_bufread(&mut std::io::stdin().lock())

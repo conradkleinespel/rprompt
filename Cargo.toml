@@ -11,9 +11,5 @@ readme = "README.md"
 keywords = ["prompt", "readline"]
 edition = "2018"
 
-[target.'cfg(unix)'.dependencies]
-rutil = { path = "../rutil", version = "0.1" }
-
 [target.'cfg(windows)'.dependencies]
 winapi = { version = "0.3", features = ["std", "winnt", "fileapi", "processenv", "winbase", "handleapi", "consoleapi", "minwindef", "wincon"] }
-rutil = { path = "../rutil", version = "0.1" }
