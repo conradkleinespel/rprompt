@@ -23,8 +23,8 @@
 //! println!("Your name is {}", name);
 //! ```
 
-use rutil::fix_line_issues::fix_line_issues;
-use rutil::print_tty::{print_tty, print_writer};
+use rtoolbox::fix_line_issues::fix_line_issues;
+use rtoolbox::print_tty::{print_tty, print_writer};
 use std::io::{BufRead, BufReader, Write};
 
 /// Reads user input from stdin
