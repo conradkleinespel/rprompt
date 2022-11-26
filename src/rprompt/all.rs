@@ -1,5 +1,5 @@
-use crate::rutil::fix_line_issues::fix_line_issues;
-use crate::rutil::print_tty::{print_tty, print_writer};
+use rutil::rutil::fix_line_issues::fix_line_issues;
+use rutil::rutil::print_tty::{print_tty, print_writer};
 use std::io::{BufRead, BufReader, Write};
 
 /// Reads user input from stdin
