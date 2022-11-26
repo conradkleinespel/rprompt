@@ -10,7 +10,7 @@ Add `rprompt` as a dependency in Cargo.toml:
 
 ```toml
 [dependencies]
-rprompt = "1.0"
+rprompt = "2.0"
 ```
 
 See examples and docs at [https://docs.rs/rprompt](https://docs.rs/rprompt).

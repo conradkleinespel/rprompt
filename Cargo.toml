@@ -1,6 +1,6 @@
 [package]
 name = "rprompt"
-version = "1.0.5"
+version = "2.0.2"
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
 description = "Prompt user input in console applications."
 license = "Apache-2.0"
@@ -11,13 +11,9 @@ readme = "README.md"
 keywords = ["prompt", "readline"]
 edition = "2018"
 
-[target.'cfg(windows)'.dependencies]
-winapi = { version = "0.3", features = ["std", "winnt", "fileapi", "processenv", "winbase", "handleapi", "consoleapi", "minwindef", "wincon"] }
-
-[target.'cfg(unix)'.dependencies.libc]
-version = "0.2"
-
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-rtoolbox = { path = "../rtoolbox" }
+rtoolbox = { path = "../rtoolbox", version = "0.0" }
+
+[target.'cfg(windows)'.dependencies.winapi]
+version = "0.3"
+features = ["std", "winnt", "fileapi", "processenv", "winbase", "handleapi", "consoleapi", "minwindef", "wincon"]
