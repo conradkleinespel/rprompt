@@ -65,22 +65,19 @@ fn get_tty_reader() -> std::io::Result<impl BufRead> {
 #[cfg(windows)]
 fn get_tty_reader() -> std::io::Result<impl BufRead> {
     use std::os::windows::io::FromRawHandle;
-    use windows_sys::core::PCSTR;
-    use windows_sys::Win32::Foundation::INVALID_HANDLE_VALUE;
-    use windows_sys::Win32::Storage::FileSystem::{
-        CreateFileA, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
-    };
-    use windows_sys::Win32::System::SystemServices::{GENERIC_READ, GENERIC_WRITE};
+    use winapi::um::fileapi::{CreateFileA, OPEN_EXISTING};
+    use winapi::um::handleapi::INVALID_HANDLE_VALUE;
+    use winapi::um::winnt::{FILE_SHARE_READ, FILE_SHARE_WRITE, GENERIC_READ, GENERIC_WRITE};
 
     let handle = unsafe {
         CreateFileA(
-            b"CONIN$\x00".as_ptr() as PCSTR,
+            b"CONIN$\x00".as_ptr() as *const i8,
             GENERIC_READ | GENERIC_WRITE,
             FILE_SHARE_READ | FILE_SHARE_WRITE,
-            std::ptr::null(),
+            std::ptr::null_mut(),
             OPEN_EXISTING,
             0,
-            INVALID_HANDLE_VALUE,
+            std::ptr::null_mut(),
         )
     };
 
@@ -89,6 +86,6 @@ fn get_tty_reader() -> std::io::Result<impl BufRead> {
     }
 
     Ok(BufReader::new(unsafe {
-        std::fs::File::from_raw_handle(handle as _)
+        std::fs::File::from_raw_handle(handle)
     }))
 }
