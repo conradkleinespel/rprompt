@@ -66,11 +66,10 @@ fn get_tty_reader() -> std::io::Result<impl BufRead> {
 fn get_tty_reader() -> std::io::Result<impl BufRead> {
     use std::os::windows::io::FromRawHandle;
     use windows_sys::core::PCSTR;
-    use windows_sys::Win32::Foundation::INVALID_HANDLE_VALUE;
+    use windows_sys::Win32::Foundation::{INVALID_HANDLE_VALUE, GENERIC_READ, GENERIC_WRITE};
     use windows_sys::Win32::Storage::FileSystem::{
         CreateFileA, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
     };
-    use windows_sys::Win32::System::SystemServices::{GENERIC_READ, GENERIC_WRITE};
 
     let handle = unsafe {
         CreateFileA(
