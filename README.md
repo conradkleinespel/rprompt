@@ -2,8 +2,6 @@
 
 `rprompt` makes it easy to prompt for input in a console application on all platforms, Unix and Windows alike.
 
-`rprompt` is made available free of charge. You can support its development through [Liberapay](https://liberapay.com/conradkleinespel/) 💪
-
 ## Usage
 
 Add `rprompt` as a dependency in Cargo.toml:
