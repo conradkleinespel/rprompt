@@ -79,7 +79,7 @@ fn get_tty_reader() -> std::io::Result<impl BufRead> {
             std::ptr::null(),
             OPEN_EXISTING,
             0,
-            INVALID_HANDLE_VALUE,
+            std::ptr::null_mut() as _,
         )
     };
 
